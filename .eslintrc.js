@@ -21,5 +21,9 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    // 要求使用分号
+    "semi": ["error", "always"],
+    // 强制使用一致的反引号，双引号或单引号
+    // "quotes": ["error", "doubles"]
   },
 };
