@@ -1,11 +1,11 @@
-import { 
+import {
   Body,
   Controller,
   Get,
   Param,
   Post,
   Delete,
-  Put
+  Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDTO, EditUserDTO } from './user.dto';
@@ -27,18 +27,18 @@ export class UserController {
     return {
       code: 200,
       data: await this.userService.findAll(),
-      message: '操作成功'
-    }
+      message: '操作成功',
+    };
   }
 
   // POST /user/create
   @Post('create')
   async createOne(@Body() user: CreateUserDTO): Promise<UserResponse> {
-    await this.userService.create(user)
+    await this.userService.create(user);
     return {
       code: 200,
-      message: '操作成功'
-    }
+      message: '操作成功',
+    };
   }
 
   // DELETE /user/:id
@@ -47,8 +47,8 @@ export class UserController {
     await this.userService.remove(id);
     return {
       code: 200,
-      message: '操作成功'
-    }
+      message: '操作成功',
+    };
   }
 
   // GET /user/:id
@@ -57,21 +57,21 @@ export class UserController {
     return {
       code: 200,
       data: await this.userService.findOne(id),
-      message: '操作成功'
-    }
+      message: '操作成功',
+    };
   }
 
   // PUT /user/:id
   @Put(':id')
   async editOne(
     @Param('id') id: number,
-    @Body() body: EditUserDTO
+    @Body() body: EditUserDTO,
   ): Promise<UserResponse> {
-    await this.userService.editOne(id, body)
+    await this.userService.editOne(id, body);
     return {
       code: 200,
       data: await this.userService.findAll(),
-      message: '操作成功'
-    }
+      message: '操作成功',
+    };
   }
 }

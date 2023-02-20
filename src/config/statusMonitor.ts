@@ -2,7 +2,7 @@ export default {
   pageTitle: 'Nest.js Monitoring ',
   // 配置端口
   port: 3000,
-  // 这里记得加全局路由 '/api'  
+  // 这里记得加全局路由 '/api'
   path: '/status',
   ignoreStartsWith: '/health/alive',
   spans: [
@@ -29,4 +29,3 @@ export default {
   },
   healthChecks: [],
 };
-
