@@ -11,11 +11,11 @@ import { UserService } from './user.service';
 import { CreateUserDTO, EditUserDTO } from './user.dto';
 // import { User } from './user.interface';
 
-interface UserResponse<T = unknown> {
-  code: number;
-  data?: T;
-  message: string;
-}
+// interface UserResponse<T = unknown> {
+//   code: number;
+//   data?: T;
+//   message: string;
+// }
 
 @Controller('user')
 export class UserController {
@@ -23,42 +23,30 @@ export class UserController {
 
   // GET /user/users_list
   @Get('users_list')
-  async findAll(): Promise<UserResponse> {
+  async findAll(): Promise<any> {
     return {
-      code: 200,
-      data: await this.userService.findAll(),
-      message: '操作成功',
+      userList: await this.userService.findAll(),
     };
   }
 
   // POST /user/create
   @Post('create')
-  async createOne(@Body() user: CreateUserDTO): Promise<UserResponse> {
+  async createOne(@Body() user: CreateUserDTO): Promise<any> {
     await this.userService.create(user);
-    return {
-      code: 200,
-      message: '操作成功',
-    };
+    return true;
   }
 
   // DELETE /user/:id
   @Delete(':id')
-  async deleteOne(@Param('id') id: number): Promise<UserResponse> {
+  async deleteOne(@Param('id') id: number): Promise<any> {
     await this.userService.remove(id);
-    return {
-      code: 200,
-      message: '操作成功',
-    };
+    return true;
   }
 
   // GET /user/:id
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<UserResponse> {
-    return {
-      code: 200,
-      data: await this.userService.findOne(id),
-      message: '操作成功',
-    };
+  async findOne(@Param('id') id: number): Promise<any> {
+    return await this.userService.findOne(id);
   }
 
   // PUT /user/:id
@@ -66,12 +54,10 @@ export class UserController {
   async editOne(
     @Param('id') id: number,
     @Body() body: EditUserDTO,
-  ): Promise<UserResponse> {
+  ): Promise<any> {
     await this.userService.editOne(id, body);
     return {
-      code: 200,
-      data: await this.userService.findAll(),
-      message: '操作成功',
+      user: await this.userService.findAll(),
     };
   }
 }

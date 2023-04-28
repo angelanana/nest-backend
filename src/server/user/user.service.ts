@@ -1,4 +1,4 @@
-import { Injectable, HttpException } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersEntity } from '../../entities/user/user.entity';
@@ -14,7 +14,10 @@ export class UserService {
   async create(user: Partial<CreateUserDTO>): Promise<UsersEntity> {
     const { username, password } = user;
     if (!username) {
-      throw new HttpException('缺少用户名称', 401);
+      throw new HttpException(
+        { code: 401, msg: '缺少用户名称' },
+        HttpStatus.FORBIDDEN,
+      );
     }
     if (!password) {
       throw new HttpException('缺少用户密码', 401);
